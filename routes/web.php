@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,10 +24,21 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth'])->group(function () {
+    
+    // Admin Dashboard
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    
+    // Reservasi
+    Route::post('/admin/reservation/{id}', [AdminController::class, 'updateReservation'])->name('admin.reservation.update');
+    
+    // Stamp
+    Route::post('/admin/add-stamp', [AdminController::class, 'addStamp'])->name('admin.add-stamp');
+
+    // Menu Management (BARU)
+    Route::post('/admin/menu', [AdminController::class, 'storeMenu'])->name('admin.menu.store');
+    Route::post('/admin/menu/{id}', [AdminController::class, 'updateMenu'])->name('admin.menu.update');
+    Route::delete('/admin/menu/{id}', [AdminController::class, 'deleteMenu'])->name('admin.menu.delete');
 });
 
 require __DIR__.'/auth.php';
