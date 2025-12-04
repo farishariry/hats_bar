@@ -13,7 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // KITA UBAH DISINI: Set 'sans' menjadi Poppins
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
         },
     },

@@ -21,7 +21,7 @@ export default function Welcome({ auth }) {
             });
     }, []);
 
-    // Kategori menu
+    // Pemisahan kategori menu
     const cocktails = menuItems.filter(item => item.category === 'beverage');
     const foods = menuItems.filter(item => item.category === 'food');
 
@@ -132,6 +132,7 @@ export default function Welcome({ auth }) {
                 <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
                     <img src="/images/hero-bg.jpg" alt="Hero" className="absolute inset-0 w-full h-full object-cover opacity-60" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#4a0505] via-transparent to-black/80"></div>
+                    <h3 className="relative z-10 text-4xl md:text-6xl lg:text-4xl font-bold text-center leading-tight max-w-4xl px-6">The Cocktail Bar That Embraces Duality</h3>
                 </section>
                 
                 {/* About Section */}
@@ -181,30 +182,28 @@ export default function Welcome({ auth }) {
                 </section>
 
                 {/* Cocktails Section */}
-                <section id="cocktails-section" className="py-20 bg-[#5e0707] border-t border-white/10">
+                <section id="cocktails-section" className="py-20 bg-[#4a0505]">
                     <div className="px-6 mb-12 text-center"><h2 className="text-4xl font-bold tracking-widest mb-2">COCKTAILS</h2></div>
                     
                     <div className="relative group">
-
-                        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#5e0707] to-transparent pointer-events-none z-[5]"></div>
-                        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#5e0707] to-transparent pointer-events-none z-[5]"></div>
+                        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#4a0505] to-transparent pointer-events-none z-[5]"></div>
+                        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#4a0505] to-transparent pointer-events-none z-[5]"></div>
 
                         <button onClick={() => scroll(cocktailRef, 'left')} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[#820d0e] text-white flex items-center justify-center">←</button>
                         
                         <div ref={cocktailRef} className="flex overflow-x-auto gap-8 px-12 pb-10 snap-x scrollbar-hide">
-                            {loading ? <p className="text-center w-full">Loading Menu...</p> : cocktails.map((item) => (
-                                <div key={item.id} className="min-w-[280px] md:min-w-[320px] snap-center h-96 rounded-2xl overflow-hidden relative shadow-2xl group-card">
-                                    <img src={item.image_url} className="w-full h-full object-cover transition duration-500 hover:scale-110" alt={item.name} />
-                                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6 pt-20">
-                                        <h3 className="text-2xl font-bold uppercase">{item.name}</h3>
-                                        <p className="text-sm opacity-80 mt-1">IDR {parseInt(item.price).toLocaleString('id-ID')}</p>
+                        {loading ? <p className="text-center w-full">Loading Menu...</p> : cocktails.map((item) => (
+                                <div key={item.id} className="min-w-[280px] md:min-w-[320px] snap-center h-80 rounded-2xl overflow-hidden relative shadow-2xl bg-black">
+                                    <img src={item.image_url} className="w-full h-full object-cover transition duration-500 hover:scale-110 opacity-80" alt={item.name} />
+                                    <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                        <h3 className="text-xl font-bold leading-tight">{item.name}</h3>
+                                        <p className="text-sm opacity-80 mt-1">{parseInt(item.price).toLocaleString('id-ID')}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        <button onClick={() => scroll(cocktailRef, 'right')} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[#820d0e] text-white flex items-center justify-center">→</button>
-
+                        <button onClick={() => scroll(foodRef, 'right')} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[#820d0e] text-white flex items-center justify-center">→</button>
                     </div>
                 </section>
 
@@ -223,8 +222,8 @@ export default function Welcome({ auth }) {
                                 <div key={item.id} className="min-w-[280px] md:min-w-[320px] snap-center h-80 rounded-2xl overflow-hidden relative shadow-2xl bg-black">
                                     <img src={item.image_url} className="w-full h-full object-cover transition duration-500 hover:scale-110 opacity-80" alt={item.name} />
                                     <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent">
-                                        <h3 className="text-xl font-bold uppercase leading-tight">{item.name}</h3>
-                                        <p className="text-sm opacity-80 mt-1">IDR {parseInt(item.price).toLocaleString('id-ID')}</p>
+                                        <h3 className="text-xl font-bold leading-tight">{item.name}</h3>
+                                        <p className="text-sm opacity-80 mt-1">{parseInt(item.price).toLocaleString('id-ID')}</p>
                                     </div>
                                 </div>
                             ))}
@@ -265,7 +264,7 @@ export default function Welcome({ auth }) {
                             <div className="pt-8">
                                 <button disabled={processing} className="w-full py-4 bg-[#820d0e] text-white font-bold text-xl uppercase tracking-widest rounded-full hover:bg-black transition duration-300 shadow-xl">
                                     {processing ? 'Sending...' : 'Book A Table'}
-                                </button>
+                                 </button>
                             </div>
                         </form>
                     </div>
