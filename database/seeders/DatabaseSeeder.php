@@ -34,9 +34,6 @@ class DatabaseSeeder extends Seeder
         $cocktails = [
             ['name' => 'Negroni', 'price' => 120000],
             ['name' => 'Old Fashioned', 'price' => 135000],
-            ['name' => 'Cosmopolitan', 'price' => 110000],
-            ['name' => 'Martini', 'price' => 125000],
-            ['name' => 'Mojito', 'price' => 95000],
         ];
 
         foreach ($cocktails as $c) {

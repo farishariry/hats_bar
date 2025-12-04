@@ -1,59 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍸 HATS - The Cocktail Bar & Resto
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Web application modern untuk HATS, sebuah Cocktail Bar & Resto eksklusif. Proyek ini dibangun menggunakan Laravel dan Inertia.js (React) untuk menghadirkan pengalaman Single Page Application (SPA) yang elegan, responsif, dan seamless.
 
-## About Laravel
+![Hero Banner](public/images/hero-bg.jpg)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Immersive Landing Page**: Desain visual dark-themed dengan animasi halus, parallax effect, dan navigasi scroll.
+- **Authentication System**: Login & Register member menggunakan Laravel Breeze.
+- **Role-Based Access Control (RBAC)**:
+  - **Admin**: Memiliki akses khusus CRUD (Admin Panel).
+  - **User**: Memiliki akses ke dashboard member.
+  - **Conditional Rendering**: Menu navigasi menyesuaikan role (Admin tidak melihat menu User).
+- **Reservation System**: Formulir reservasi online yang terintegrasi langsung ke database.
+- **Dynamic Menu Gallery**: Menu (Cocktails) dan makanan (Foods) yang diambil via API (`/api/menu-items`) dengan fitur horizontal scroll carousel.
+- **Responsive Design**: Tampilan optimal di Desktop, Tablet, dan Mobile.
+- **Stamp Gamification**: User akan mendapatkan reward apabila sudah memiliki 10 stamp.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tech Stack
 
-## Learning Laravel
+- **Backend**: Laravel 12.41.1
+- **Frontend**: React.js
+- **Database**: MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🚀 Instalasi & Menjalankan Project
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ikuti langkah-langkah berikut untuk menjalankan proyek di komputer lokal Anda:
 
-## Laravel Sponsors
+### 1. Clone Repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/username-anda/hats-bar.git
+cd hats-bar
+```
 
-### Premium Partners
+### 2. Install Dependencies
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Install dependensi backend (PHP) dan frontend (Node.js):
 
-## Contributing
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Konfigurasi Environment
 
-## Code of Conduct
+Salin file `.env.example` menjadi `.env`:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+### 4. Generate Key & Migrasi Database
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate app key dan jalankan migrasi tabel (pastikan database `hats_db` sudah dibuat di MySQL):
 
-## License
+```bash
+php artisan key:generate
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Opsional:** Jika ada seeder untuk menu items:
+
+```bash
+php artisan db:seed
+```
+
+### 5. Jalankan Aplikasi
+
+Anda perlu menjalankan dua terminal terpisah:
+
+**Terminal 1 (Laravel Server):**
+```bash
+php artisan serve
+```
+
+**Terminal 2 (Vite Development Server):**
+```bash
+npm run dev
+```
+
+Buka browser dan akses: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+## 👥 Pengaturan Role Admin
+
+Secara default, user baru yang mendaftar akan memiliki role `user`. Untuk membuat akun Admin:
+
+1. Daftar akun baru melalui halaman Register (`/register`).
+2. Buka database administrator (phpMyAdmin/TablePlus).
+3. Cari tabel `users`.
+4. Ubah kolom `role` pada user tersebut dari `'user'` menjadi `'admin'`.
+
+## 📂 Struktur Folder Penting
+
+```
+resources/js/Pages/       # Halaman utama (Welcome, Auth, Dashboard)
+resources/js/Components/  # Komponen UI reusable
+resources/js/Layouts/     # Layout utama (GuestLayout, AuthenticatedLayout)
+app/Http/Controllers/    # Logika Backend
+routes/web.php           # Definisi rute aplikasi
+```
+
+## 📝 Catatan Pengembang
+
+- **Menu Images**: Pastikan gambar menu disimpan di folder `public/storage` atau sesuaikan path di database.
+- **Backgrounds**: Aset gambar statis (background login, logo) berada di folder `public/images`.
+
+---
+© 2025 HATS Project. All Rights Reserved.
