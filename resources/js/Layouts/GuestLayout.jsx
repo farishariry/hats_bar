@@ -1,16 +1,17 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 
 export default function GuestLayout({ children }) {
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-            <div>
+        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#4a0505] text-white">
+            {/* Logo Text Pengganti */}
+            <div className="mb-6">
                 <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
+                   <h1 className="text-5xl font-black text-white tracking-widest drop-shadow-lg">HATS</h1>
                 </Link>
             </div>
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+            {/* Kotak Form Login/Register */}
+            <div className="w-full sm:max-w-md mt-6 px-6 py-8 bg-[#2d0202] shadow-2xl overflow-hidden sm:rounded-3xl border border-white/10">
                 {children}
             </div>
         </div>
