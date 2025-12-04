@@ -8,7 +8,11 @@ export default function Welcome({ auth }) {
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Fethc data menu dari API
+    // --- LOGIKA ROLE ADMIN ---
+    // Cek apakah user login DAN role-nya adalah 'admin'
+    const isAdmin = auth.user && auth.user.role === 'admin';
+
+    // Fetch data menu dari API
     useEffect(() => {
         axios.get('/api/menu-items')
             .then(response => {
@@ -95,19 +99,31 @@ export default function Welcome({ auth }) {
                     <span className={`h-[3px] w-full bg-white rounded-full transition-all duration-300 ${isNavOpen ? '-rotate-45 -translate-y-[9px]' : ''}`}></span>
                 </button>
 
-                {/* Hamburger */}
+                {/* Hamburger Menu Overlay */}
                 <div className={`fixed inset-0 bg-[#2d0202]/95 backdrop-blur-md z-40 transition-transform duration-500 ease-in-out flex items-center px-12 md:px-24 ${isNavOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="flex flex-col space-y-6 w-full max-w-2xl">
+                        
+                        {/* Menu Items 1-3 */}
                         {[{ id: 'about-section', label: 'ABOUT', num: '1.' }, { id: 'discovery-section', label: 'MENU', num: '2.' }, { id: 'reservation-form', label: 'RESERVATION', num: '3.' }].map((item) => (
                             <button key={item.label} onClick={() => scrollToSection(item.id)} className="text-left group flex items-center gap-6">
                                 <span className="text-xl font-light text-red-300 group-hover:text-white transition">{item.num}</span>
                                 <div className="text-white hover:text-[#820d0e] text-4xl md:text-6xl font-bold uppercase tracking-tight transition origin-left">{item.label}</div>
                             </button>
                         ))}
-                        <div className="text-left group flex items-center gap-6">
-                            <span className="text-xl font-light text-red-300 group-hover:text-white transition">4.</span>
-                            <Link href={auth.user ? route('dashboard') : route('login')} className="text-white hover:text-[#820d0e] text-4xl md:text-6xl font-bold uppercase tracking-tight transition origin-left">ACCOUNT</Link>
-                        </div>
+                        
+                        {/* Menu Item 4 (ACCOUNT) - DIBUNGKUS LOGIKA ADMIN */}
+                        {!isAdmin && (
+                            <div className="text-left group flex items-center gap-6">
+                                <span className="text-xl font-light text-red-300 group-hover:text-white transition">4.</span>
+                                <Link 
+                                    href={auth.user ? route('dashboard') : route('login')} 
+                                    className="text-white hover:text-[#820d0e] text-4xl md:text-6xl font-bold uppercase tracking-tight transition origin-left"
+                                >
+                                    {auth.user ? 'ACCOUNT' : 'LOGIN'}
+                                </Link>
+                            </div>
+                        )}
+
                     </div>
                 </div>
 
@@ -203,7 +219,7 @@ export default function Welcome({ auth }) {
                             ))}
                         </div>
 
-                        <button onClick={() => scroll(foodRef, 'right')} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[#820d0e] text-white flex items-center justify-center">→</button>
+                        <button onClick={() => scroll(cocktailRef, 'right')} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[#820d0e] text-white flex items-center justify-center">→</button>
                     </div>
                 </section>
 
