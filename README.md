@@ -2,7 +2,7 @@
 
 Web application modern untuk HATS, sebuah Cocktail Bar eksklusif. Proyek ini dibangun menggunakan Laravel dan React.js untuk menghadirkan pengalaman Single Page Application yang elegan, responsif, dan seamless.
 
-![Hero Banner](public/images/hero-bg.jpg)
+![Hero Banner](public/images/main.png)
 
 ## Fitur
 
