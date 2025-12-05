@@ -10,17 +10,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Username
-            $table->string('email')->unique(); // Login pakai ini (atau username dianggap email)
+            $table->string('name');
+            $table->string('email')->unique();
             $table->string('password');
             
-            // --- FIELD TAMBAHAN PROJEK HATS ---
-            $table->string('role')->default('member'); // 'admin' atau 'member'
+            // Role
+            $table->string('role')->default('member');
             $table->string('phone')->nullable();
             
-            // GAMIFIKASI
-            $table->integer('stamps')->default(0); // Jumlah stempel (max 10)
-            $table->string('member_code')->unique()->nullable(); // Untuk QR Code
+            // Stamp
+            $table->integer('stamps')->default(0);
+            $table->string('member_code')->unique()->nullable();
             
             $table->rememberToken();
             $table->timestamps();

@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit} className="space-y-6">
                 
-                {/* --- INPUT EMAIL --- */}
+                {/* Email */}
                 <div>
                     <label className="block font-medium text-sm text-gray-300">Email</label>
                     <input
@@ -43,7 +43,7 @@ export default function Login({ status, canResetPassword }) {
                     {errors.email && <div className="text-red-500 text-xs mt-1">{errors.email}</div>}
                 </div>
 
-                {/* --- INPUT PASSWORD --- */}
+                {/* Password */}
                 <div>
                     <label className="block font-medium text-sm text-gray-300">Password</label>
                     <input
@@ -58,7 +58,7 @@ export default function Login({ status, canResetPassword }) {
                     {errors.password && <div className="text-red-500 text-xs mt-1">{errors.password}</div>}
                 </div>
 
-                {/* --- REMEMBER ME & FORGOT PASSWORD --- */}
+                {/* Remember me & Forgot password */}
                 <div className="flex items-center justify-between text-sm">
                     <label className="flex items-center text-gray-400 hover:text-gray-200 cursor-pointer">
                         <input
@@ -81,14 +81,14 @@ export default function Login({ status, canResetPassword }) {
                     )}
                 </div>
 
-                {/* --- TOMBOL LOGIN --- */}
+                {/* Tombol login */}
                 <div>
                     <button disabled={processing} className="w-full bg-[#820d0e] text-white font-bold py-3 rounded-xl hover:bg-[#a31012] transition shadow-lg tracking-widest uppercase">
                         {processing ? 'Logging in...' : 'Log in'}
                     </button>
                 </div>
 
-                {/* --- LINK MENUJU REGISTER (YANG KAMU MINTA) --- */}
+                {/* Link ke register */}
                 <div className="mt-6 text-center text-sm border-t border-white/10 pt-4">
                     <span className="text-gray-400">Don't have an account? </span>
                     <Link href={route('register')} className="text-red-400 hover:text-white font-bold transition ml-1 uppercase tracking-wider">

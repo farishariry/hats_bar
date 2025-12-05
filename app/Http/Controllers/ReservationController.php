@@ -9,17 +9,15 @@ class ReservationController extends Controller
 {
     public function store(Request $request)
     {
-        // 1. Validasi Input 
-        // (Kita sesuaikan rules dengan nama field yang dikirim dari React: guests & date_time)
+        // Validasi inpitan
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string',
-            'guests' => 'required|integer|min:1', // React mengirim 'guests', bukan 'pax'
-            'date_time' => 'required',             // React mengirim 'date_time' gabungan
+            'guests' => 'required|integer|min:1',
+            'date_time' => 'required',
         ]);
 
-        // 2. Pecah date_time menjadi Tanggal dan Jam
-        // Format dari React biasanya "2025-12-03T19:00"
+        // Konversi date_time ke date dan time terpisah
         try {
             $parts = explode('T', $validated['date_time']);
             $date = $parts[0];
@@ -29,11 +27,10 @@ class ReservationController extends Controller
             $time = now()->format('H:i');
         }
 
-        // 3. Simpan ke Database (Lakukan Mapping Manual di sini)
+        // Kirim ke database
         Reservation::create([
             'name' => $validated['name'],
             'phone' => $validated['phone'],
-            // Masukkan data 'guests' dari input ke kolom 'pax' di database
             'pax' => $validated['guests'], 
             'reservation_date' => $date,
             'reservation_time' => $time,

@@ -6,12 +6,10 @@ export default function Dashboard({ auth }) {
     const user = auth.user;
     const [showQR, setShowQR] = useState(false);
 
-    // Logic Stamp: Total 10 kotak.
-    // Misal user punya 5 stamp. Maka 5 kotak merah, 5 kotak kosong.
+    // Logic stamp progress
     const totalStamps = 10;
     const currentStamps = user.stamps || 0; 
     
-    // Buat array [1, 2, ... 10] untuk looping lingkaran
     const stampsArray = Array.from({ length: totalStamps }, (_, i) => i + 1);
 
     return (
@@ -20,10 +18,8 @@ export default function Dashboard({ auth }) {
 
             <div className="min-h-screen bg-[#660000] flex flex-col items-center justify-center relative overflow-hidden font-sans text-white">
                 
-                {/* Background Noise/Gradient Halus */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#8B0000] to-[#4a0000] opacity-80"></div>
 
-                {/* --- HEADER --- */}
                 <div className="z-10 text-center mb-12">
                     <h1 className="text-5xl font-black tracking-widest uppercase drop-shadow-lg mb-4">ACCOUNT</h1>
                     <p className="text-2xl font-light tracking-wide">
@@ -31,17 +27,14 @@ export default function Dashboard({ auth }) {
                     </p>
                 </div>
 
-                {/* --- STAMP PROGRESS CARD --- */}
+                {/* Stamp progress */}
                 <div className="z-10 w-full max-w-4xl px-4 mb-16">
-                    {/* Wadah Putih Panjang */}
                     <div className="bg-white rounded-full p-4 md:p-6 shadow-2xl relative flex items-center justify-between">
                         
-                        {/* Label 5/10 di kiri atas lingkaran pertama (Visual Only) */}
                         <div className="absolute -top-10 left-6 bg-white text-[#8B0000] font-bold px-3 py-1 rounded-full text-sm shadow-lg">
                             {currentStamps}/{totalStamps}
                         </div>
 
-                        {/* Lingkaran-lingkaran Stamp */}
                         <div className="flex justify-between w-full gap-2 md:gap-4 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
                             {stampsArray.map((num) => (
                                 <div 
@@ -57,13 +50,9 @@ export default function Dashboard({ auth }) {
                     <p className="text-center mt-4 text-sm font-bold tracking-[0.2em] opacity-70">STAMP PROGRESS</p>
                 </div>
 
-                {/* --- TOMBOL QR CODE (Merah Bergerigi) --- */}
+                {/* Tombol QR */}
                 <div className="z-10">
-                    <button 
-                        onClick={() => setShowQR(true)}
-                        className="relative group w-32 h-32 flex items-center justify-center"
-                    >
-                        {/* Efek Bergerigi (Star/Badge) menggunakan CSS Clip Path */}
+                    <button onClick={() => setShowQR(true)} className="relative group w-32 h-32 flex items-center justify-center">
                         <div className="absolute inset-0 bg-[#a31616] group-hover:bg-[#c41c1c] transition-colors duration-300 shadow-xl" 
                              style={{ clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)' }}>
                         </div>
@@ -71,7 +60,7 @@ export default function Dashboard({ auth }) {
                     </button>
                 </div>
 
-                {/* --- TOMBOL BACK / LOGOUT --- */}
+                {/* Tombol back & logout */}
                 <div className="z-10 mt-12 flex gap-4">
                     <Link href="/" className="bg-white text-[#8B0000] px-6 py-2 rounded-full font-bold hover:bg-gray-200 transition">
                         ← BACK HOME
@@ -81,7 +70,7 @@ export default function Dashboard({ auth }) {
                     </Link>
                 </div>
 
-                {/* --- MODAL POPUP QR CODE --- */}
+                {/* Pop up QR */}
                 {showQR && (
                     <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
                         <div className="bg-white p-8 rounded-3xl max-w-sm w-full text-center relative animate-fade-in-up">
@@ -108,7 +97,6 @@ export default function Dashboard({ auth }) {
                 )}
             </div>
             
-            {/* CSS Animation Utility */}
             <style>{`
                 .animate-fade-in-up { animation: fadeInUp 0.3s ease-out forwards; }
                 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

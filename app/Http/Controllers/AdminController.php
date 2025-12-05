@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
-    // --- HALAMAN UTAMA ADMIN ---
+    // Halaman admin
     public function index()
     {
         return Inertia::render('Admin/Dashboard', [
@@ -20,7 +20,7 @@ class AdminController extends Controller
         ]);
     }
 
-    // --- UPDATE STATUS RESERVASI ---
+    // Status reservasi
     public function updateReservation(Request $request, $id)
     {
         $reservation = Reservation::findOrFail($id);
@@ -28,22 +28,19 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Status reservasi diperbarui.');
     }
 
-    // --- LOGIC STAMP (REVISI: Auto Reset) ---
+    // Logic stamp
     public function addStamp(Request $request)
     {
         $request->validate(['member_code' => 'required|exists:users,member_code']);
 
         $member = User::where('member_code', $request->member_code)->first();
         
-        // Cek Logic Stamp
+        // Cek logic stamp
         if ($member->stamps >= 10) {
-            // Jika sudah 10, maka scan berikutnya adalah RESET (Klaim Reward)
             $member->update(['stamps' => 0]);
             return redirect()->back()->with('success', "REWARD DIKLAIM! Stamp {$member->name} telah di-reset ke 0.");
         } else {
-            // Jika belum 10, tambah 1
             $member->increment('stamps');
-            // Cek apakah setelah ditambah jadi 10?
             if ($member->stamps == 10) {
                 return redirect()->back()->with('success', "STAMP PENUH! {$member->name} berhak dapat Reward (Scan sekali lagi untuk Reset).");
             }
@@ -52,12 +49,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success', "Stamp berhasil ditambahkan. Total: {$member->stamps}/10");
     }
 
-    // --- CRUD MENU ---
+    // CRUD menu item
 
-    // 1. TAMBAH MENU
+    // Tambah menu
     public function storeMenu(Request $request)
     {
-        // Validasi input
+        // Validasi inputan
         $validated = $request->validate([
             'name' => 'required|string',
             'category' => 'required|in:beverage,food',
@@ -65,22 +62,19 @@ class AdminController extends Controller
             'image' => 'required|image|max:2048', 
         ]);
 
-        // Proses Upload
+        // Proses upload
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('menu-images', 'public');
             $validated['image_url'] = '/storage/' . $path;
         }
 
-        // --- PERBAIKAN DI SINI ---
-        // Kita HAPUS 'image' dari data yang mau disimpan
-        // Karena di database tidak ada kolom 'image', adanya 'image_url'
         unset($validated['image']); 
 
         MenuItem::create($validated); 
         return redirect()->back()->with('success', 'Menu berhasil ditambahkan!');
     }
 
-    // 2. EDIT MENU
+    // Edit menu
     public function updateMenu(Request $request, $id)
     {
         $menu = MenuItem::findOrFail($id);
@@ -94,20 +88,18 @@ class AdminController extends Controller
 
         $validated = $request->validate($rules);
 
-        // Cek apakah user upload gambar baru?
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('menu-images', 'public');
             $validated['image_url'] = '/storage/' . $path;
         }
 
-        // --- PERBAIKAN DI SINI JUGA ---
         unset($validated['image']); 
 
         $menu->update($validated);
         return redirect()->back()->with('success', 'Menu berhasil diupdate!');
     }   
 
-    // 3. HAPUS MENU
+    // Apus menu
     public function deleteMenu($id)
     {
         MenuItem::findOrFail($id)->delete();

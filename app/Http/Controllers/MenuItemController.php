@@ -12,7 +12,7 @@ class MenuItemController extends Controller
         // Ambil data menu dari database
         $items = MenuItem::all(); 
         
-        // Kirim sebagai JSON agar bisa dibaca React
+        // JSON supaya bisa dibaca react
         return response()->json($items);
     }
 }

@@ -8,15 +8,14 @@ export default function Welcome({ auth }) {
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // --- LOGIKA ROLE ADMIN ---
-    // Cek apakah user login DAN role-nya adalah 'admin'
+    // Validasi role
     const isAdmin = auth.user && auth.user.role === 'admin';
 
     // Fetch data menu dari API
     useEffect(() => {
         axios.get('/api/menu-items')
             .then(response => {
-                setMenuItems(response.data); // Simpan data ke state
+                setMenuItems(response.data);
                 setLoading(false);
             })
             .catch(error => {
@@ -53,7 +52,7 @@ export default function Welcome({ auth }) {
             },
             onSuccess: () => {
                 reset();
-                alert('RESERVASI BERHASIL! Data sudah masuk database.');
+                alert('Reservasi berhasil, tunggu konfirmasi dari kami.');
             },
             onError: (errors) => {
                 alert('Gagal reservasi. Cek inputan anda.');
@@ -257,23 +256,23 @@ export default function Welcome({ auth }) {
 
                         <form onSubmit={submitReservation} className="space-y-10">
                             
-                            <div className="group"> {/* --- 1. NAME --- */}
+                            <div className="group"> {/* nama */}
                                 <input type="text" required value={data.name} onChange={e => setData('name', e.target.value)} className="w-full border-0 border-b-2 border-[#820d0e] bg-transparent py-2 px-0 text-xl font-medium focus:ring-0 placeholder-gray-400" placeholder="NAME"/>
                             </div>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                 
                                 
-                                <div className="group"> {/* --- 2. PHONE NUMBER --- */}
+                                <div className="group"> {/* nomer telfon */}
                                     <input type="tel" required value={data.phone} onChange={e => setData('phone', e.target.value)} className="w-full border-0 border-b-2 border-[#820d0e] bg-transparent py-2 px-0 text-xl font-medium focus:ring-0 placeholder-gray-400" placeholder="PHONE NUMBER"/>
                                 </div>
                                 
-                                <div className="group"> {/* --- 3. PAX --- */}
+                                <div className="group"> {/* pax */}
                                     <input type="number" required value={data.guests} onChange={e => setData('guests', e.target.value)} className="w-full border-0 border-b-2 border-[#820d0e] bg-transparent py-2 px-0 text-xl font-medium focus:ring-0 placeholder-gray-400" placeholder="HOW MANY PEOPLE?"/>
                                 </div>
                             </div>
                             
-                            <div className="group"> {/* --- 4. DATE & TIME --- */}
+                            <div className="group"> {/* date & time */}
                                 <input type="datetime-local" required value={data.date_time} onChange={e => setData('date_time', e.target.value)} className="w-full border-0 border-b-2 border-[#820d0e] bg-transparent py-2 px-0 text-xl font-medium focus:ring-0 text-gray-700 placeholder-gray-400"placeholder="DATE & TIME"/>
                             </div>
                             

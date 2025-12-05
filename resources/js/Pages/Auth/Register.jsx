@@ -27,7 +27,7 @@ export default function Register() {
 
             <form onSubmit={submit} className="space-y-6">
                 
-                <div> {/* Name */}
+                <div> {/* Nama */}
                     <label className="block font-medium text-sm text-gray-300">Name</label>
                     <input
                         type="text"
@@ -72,7 +72,7 @@ export default function Register() {
                     {errors.password && <div className="text-red-500 text-xs mt-1">{errors.password}</div>}
                 </div>
 
-                <div> {/* Confirm Password */}
+                <div> {/* Konfirmasi password */}
                     <label className="block font-medium text-sm text-gray-300">Confirm Password</label>
                     <input
                         type="password"
@@ -87,7 +87,7 @@ export default function Register() {
                     {errors.password_confirmation && <div className="text-red-500 text-xs mt-1">{errors.password_confirmation}</div>}
                 </div>
 
-                <div> {/* Register Button */}   
+                <div> {/* Tombol register */}   
                     <button disabled={processing} className="w-full bg-[#820d0e] text-white font-bold py-3 rounded-xl hover:bg-[#a31012] transition shadow-lg tracking-widest uppercase">
                         {processing ? 'Creating Account...' : 'Register'}
                     </button>

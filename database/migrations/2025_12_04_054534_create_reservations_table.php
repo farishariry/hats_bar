@@ -10,20 +10,20 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            // Data Tamu
+
+            // Data pemesan
             $table->string('name');
             $table->string('phone');
-            $table->string('email')->nullable();
             
-            // Data Reservasi
-            $table->integer('pax'); // Jumlah orang
+            // Data reservasi
+            $table->integer('pax'); 
             $table->date('reservation_date');
             $table->time('reservation_time');
             
-            // Status: pending, approved, rejected
+            // Status: pending, acc, reject
             $table->string('status')->default('pending');
             
-            // Jika yang booking adalah member (opsional)
+            // Jika yang booking adalah member
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             
             $table->timestamps();

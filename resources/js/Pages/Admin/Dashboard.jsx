@@ -2,17 +2,17 @@ import { Head, useForm, router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function AdminDashboard({ auth, reservations, menuItems }) {
-    // 1. Cek apakah user adalah Admin
+
+    // Validasi role admin
     if (auth.user.role !== 'admin') {
         window.location.href = '/dashboard';
         return null; 
     }
 
-    // --- STATE ---
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingMenu, setEditingMenu] = useState(null); // Null = Mode Tambah, Ada Data = Mode Edit
 
-    // --- FORM 1: STAMP / QR SCANNER ---
+    // Stamp dan scan QR member
     const stampForm = useForm({ member_code: '' });
     
     const handleScan = (e) => {
@@ -26,8 +26,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
         });
     };
 
-    // --- FORM 2: MENU MANAGEMENT (CRUD + UPLOAD GAMBAR) ---
-    // Perubahan: image_url diganti image: null
+    // Form CRUD menu item
     const menuForm = useForm({
         name: '', 
         category: 'beverage', 
@@ -37,7 +36,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
 
     const openCreateModal = () => {
         setEditingMenu(null);
-        menuForm.reset(); // Kosongkan form
+        menuForm.reset();
         setIsModalOpen(true);
     };
 
@@ -47,7 +46,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
             name: item.name,
             category: item.category,
             price: item.price,
-            image: null // Reset input file saat mode edit
+            image: null
         });
         setIsModalOpen(true);
     };
@@ -55,15 +54,12 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
     const submitMenu = (e) => {
         e.preventDefault();
         
-        // Perubahan: Menggunakan POST dan forceFormData: true untuk upload file
         if (editingMenu) {
-            // Mode Update
             menuForm.post(route('admin.menu.update', editingMenu.id), {
                 onSuccess: () => setIsModalOpen(false),
                 forceFormData: true,
             });
         } else {
-            // Mode Create
             menuForm.post(route('admin.menu.store'), {
                 onSuccess: () => setIsModalOpen(false),
                 forceFormData: true,
@@ -77,7 +73,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
         }
     };
 
-    // --- LOGIC 3: UPDATE RESERVASI ---
+    // Logic status reservasi
     const updateStatus = (id, status) => {
         if(confirm(`Ubah status jadi ${status}?`)) {
             router.post(route('admin.reservation.update', id), { status });
@@ -99,7 +95,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
 
             <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
 
-                {/* --- BAGIAN 1: SCAN QR --- */}
+                {/* Stamp dan scan QR member */}
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-blue-500">
                     <h2 className="text-xl font-bold mb-4 uppercase text-gray-700">Scan Member QR</h2>
                     <form onSubmit={handleScan} className="flex gap-4">
@@ -116,7 +112,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
                     </form>
                 </div>
 
-                {/* --- BAGIAN 2: MENU LIST --- */}
+                {/* Menu Management */}
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-gray-700">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl font-bold uppercase text-gray-700">Menu Management</h2>
@@ -146,7 +142,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
                     </div>
                 </div>
 
-                {/* --- BAGIAN 3: RESERVATIONS --- */}
+                {/* Reservation */}
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-[#8B0000]">
                     <h2 className="text-xl font-bold mb-4 uppercase text-gray-700">Reservations</h2>
                     <div className="overflow-x-auto">
@@ -195,7 +191,7 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
 
             </div>
 
-            {/* --- MODAL POPUP FORM (CREATE / EDIT MENU) --- */}
+            {/* Pop up CRUD menu item */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                     <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 animate-fade-in-up">
@@ -204,14 +200,12 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
                         </h2>
                         
                         <form onSubmit={submitMenu} className="space-y-4">
-                            {/* Input Nama */}
                             <div>
                                 <label className="block text-sm font-bold mb-1">Name</label>
                                 <input type="text" required className="w-full border p-2 rounded" 
                                     value={menuForm.data.name} onChange={e => menuForm.setData('name', e.target.value)} />
                             </div>
                             
-                            {/* Input Kategori & Harga */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-bold mb-1">Category</label>
@@ -228,7 +222,6 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
                                 </div>
                             </div>
 
-                            {/* Input Image (FILE UPLOAD) - BAGIAN YANG DIUBAH */}
                             <div>
                                 <label className="block text-sm font-bold mb-1">Image (Max 2MB)</label>
                                 <input 
@@ -237,11 +230,9 @@ export default function AdminDashboard({ auth, reservations, menuItems }) {
                                     className="w-full border p-2 rounded text-sm bg-gray-50"
                                     onChange={e => menuForm.setData('image', e.target.files[0])} 
                                 />
-                                {/* Error Message */}
                                 {menuForm.errors.image && (
                                     <div className="text-red-500 text-xs mt-1">{menuForm.errors.image}</div>
                                 )}
-                                {/* Preview Link Lama */}
                                 {editingMenu && (
                                     <div className="mt-2 text-xs text-gray-500">
                                         Gambar saat ini: <a href={editingMenu.image_url} target="_blank" className="text-blue-500 underline">Lihat</a>

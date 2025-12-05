@@ -4,11 +4,10 @@ export default function Guest({ children }) {
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden">
             
-            {/* Background Image */}
+            {/* Gambar background */}
             <div 
                 className="absolute inset-0 z-0"
                 style={{
-                    // PERBAIKAN: Menggunakan template literal dan url() agar CSS berfungsi
                     backgroundImage: `url('/images/guestlayout-bg.jpg')`, 
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
@@ -20,12 +19,11 @@ export default function Guest({ children }) {
             {/* Logo */}
             <div className="relative z-10 mb-6">
                 <Link href="/">
-                    {/* Menggunakan Teks HATS sesuai style Anda */}
                     <img src="/images/logo.png" alt="HATS Logo" className="h-24 w-auto drop-shadow-lg" />          
                 </Link>
             </div>
 
-            {/* Form Container */}
+            {/* Form container */}
             <div className="relative z-10 w-full sm:max-w-md mt-6 px-8 py-10 bg-[#2d0202]/80 backdrop-blur-md shadow-2xl border border-white/10 sm:rounded-[2rem] overflow-hidden">
                 {children}
             </div>

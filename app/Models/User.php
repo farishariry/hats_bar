@@ -51,12 +51,10 @@ class User extends Authenticatable
         ];
     }
 
-    // --- 2. INI BAGIAN LOGIKA OTOMATISNYA (Tambahkan di paling bawah sebelum tutup kurung) ---
+    // Logic generate member_code 
     protected static function booted()
     {
         static::creating(function ($user) {
-            // Jika member_code kosong saat user dibuat,
-            // sistem akan membuatkan kode acak diawali "HATS-"
             if (empty($user->member_code)) {
                 $user->member_code = 'HATS-' . strtoupper(Str::random(8));
             }
