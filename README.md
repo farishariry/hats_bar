@@ -1,21 +1,16 @@
-# 🍸 HATS - The Cocktail Bar & Resto
+# HATS - The Cocktail Bar
 
-Web application modern untuk HATS, sebuah Cocktail Bar & Resto eksklusif. Proyek ini dibangun menggunakan Laravel dan Inertia.js (React) untuk menghadirkan pengalaman Single Page Application (SPA) yang elegan, responsif, dan seamless.
+Web application modern untuk HATS, sebuah Cocktail Bar eksklusif. Proyek ini dibangun menggunakan Laravel dan React.js untuk menghadirkan pengalaman Single Page Application yang elegan, responsif, dan seamless.
 
 ![Hero Banner](public/images/hero-bg.jpg)
 
 ## Fitur
 
-- **Immersive Landing Page**: Desain visual dark-themed dengan animasi halus, parallax effect, dan navigasi scroll.
 - **Authentication System**: Login & Register member menggunakan Laravel Breeze.
-- **Role-Based Access Control (RBAC)**:
-  - **Admin**: Memiliki akses khusus CRUD (Admin Panel).
-  - **User**: Memiliki akses ke dashboard member.
-  - **Conditional Rendering**: Menu navigasi menyesuaikan role (Admin tidak melihat menu User).
 - **Reservation System**: Formulir reservasi online yang terintegrasi langsung ke database.
 - **Dynamic Menu Gallery**: Menu (Cocktails) dan makanan (Foods) yang diambil via API (`/api/menu-items`) dengan fitur horizontal scroll carousel.
 - **Responsive Design**: Tampilan optimal di Desktop, Tablet, dan Mobile.
-- **Stamp Gamification**: User akan mendapatkan reward apabila sudah memiliki 10 stamp.
+- **Stamp Gamification**: User akan mendapatkan reward apabila sudah memenuhi syarat.
 
 ## Tech Stack
 
