@@ -64,7 +64,7 @@ class AdminController extends Controller
 
         // Proses upload
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('menu-images', 'public');
+            $path = $request->file('image')->store('menu-images', 'public_uploads');
             $validated['image_url'] = '/storage/' . $path;
         }
 
@@ -89,7 +89,7 @@ class AdminController extends Controller
         $validated = $request->validate($rules);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('menu-images', 'public');
+            $path = $request->file('image')->store('menu-images', 'public_uploads');
             $validated['image_url'] = '/storage/' . $path;
         }
 
