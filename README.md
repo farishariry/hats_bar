@@ -1,5 +1,6 @@
 # HATS - The Cocktail Bar
 
+
 Web application modern untuk HATS, sebuah Cocktail Bar eksklusif. Proyek ini dibangun menggunakan Laravel dan React.js untuk menghadirkan pengalaman Single Page Application yang elegan, responsif, dan seamless.
 
 ![Hero Banner](public/images/main.png)
@@ -9,7 +10,6 @@ Web application modern untuk HATS, sebuah Cocktail Bar eksklusif. Proyek ini dib
 - **Authentication System**: Login & Register member menggunakan Laravel Breeze.
 - **Reservation System**: Formulir reservasi online yang terintegrasi langsung ke database.
 - **Dynamic Menu Gallery**: Menu (Cocktails) dan makanan (Foods) yang diambil via API (`/api/menu-items`) dengan fitur horizontal scroll carousel.
-- **Responsive Design**: Tampilan optimal di Desktop, Tablet, dan Mobile.
 - **Stamp Gamification**: User akan mendapatkan reward apabila sudah memenuhi syarat.
 
 ## Tech Stack
@@ -20,8 +20,6 @@ Web application modern untuk HATS, sebuah Cocktail Bar eksklusif. Proyek ini dib
 
 ## Instalasi & Run Project
 
-Ikuti langkah-langkah berikut:
-
 ### 1. Clone Repository
 
 ```bash
@@ -31,7 +29,7 @@ cd hats-bar
 
 ### 2. Install Dependencies
 
-Install dependensi backend (PHP) dan frontend (Node.js):
+Install dependencies backend (PHP) dan frontend (Node.js):
 
 ```bash
 composer install
@@ -40,7 +38,7 @@ npm install
 
 ### 3. Konfigurasi Environment
 
-Salin file `.env.example` menjadi `.env`:
+Copy file `.env.example` menjadi `.env`:
 
 ```bash
 cp .env.example .env
@@ -48,7 +46,7 @@ cp .env.example .env
 
 ### 4. Generate Key & Migrasi Database
 
-Generate app key dan jalankan migrasi tabel (pastikan database `hats_db` sudah dibuat di MySQL):
+Generate app key dan run migrasi tabel (pastikan database `hats_db` sudah dibuat di MySQL):
 
 ```bash
 php artisan key:generate
@@ -65,7 +63,7 @@ password: password
 
 ### 5. Jalankan Aplikasi
 
-Jalankan dua terminal terpisah:
+Jalankan dua solit terminal:
 
 **Terminal 1 (Laravel Server):**
 ```bash
@@ -85,10 +83,12 @@ Buka browser dan akses: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ```
 resources/js/Pages/       # Halaman utama (Welcome, Auth, Dashboard)
 resources/js/Components/  # Komponen UI reusable
-resources/js/Layouts/     # Layout utama (GuestLayout, AuthenticatedLayout)
-app/Http/Controllers/    # Logika Backend
-routes/web.php           # Definisi rute aplikasi
+resources/js/Layouts/     # Main layout (GuestLayout, AuthenticatedLayout)
+app/Http/Controllers/    # Logic Backend
+routes/web.php           # App route
 ```
 
 ---
+Project ini adalah sebuah project ujian akhir semester pribadi
+
 © 2025 Faris Hariri - XI RPL SMK Telkom Bandung
